@@ -1,0 +1,8 @@
+{
+  "name": "MedNutro Global",
+  "description": "Official global brand center for MedNutro - High-Efficiency Nutrition Standards.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

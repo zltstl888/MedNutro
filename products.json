@@ -1,0 +1,31 @@
+[
+  {
+    "id": "white-bottle",
+    "name": "prod.white.title",
+    "tagline": "prod.white.subtitle",
+    "description": "",
+    "badge": "prod.white.badge",
+    "features": [
+      "prod.white.feat1",
+      "prod.white.feat2",
+      "prod.white.feat3"
+    ],
+    "image": "white-bottle-visual",
+    "colorTheme": "blue",
+    "stats": []
+  },
+  {
+    "id": "black-bottle",
+    "name": "prod.black.title",
+    "tagline": "prod.black.subtitle",
+    "description": "prod.black.desc",
+    "badge": "prod.black.badge",
+    "features": [],
+    "image": "black-bottle-visual",
+    "colorTheme": "purple",
+    "stats": [
+      { "value": "22+", "label": "prod.black.stat1" },
+      { "value": "3D", "label": "prod.black.stat2" }
+    ]
+  }
+]
