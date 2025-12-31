@@ -4,6 +4,8 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 
 import { useLanguage } from '../contexts/LanguageContext';
 import { Product } from '../types';
 import { products } from '../products';
+import whiteBottleDetail from '../assets/images/细胞平衡小白瓶详情页.jpg';
+import blackBottleDetail from '../assets/images/女士焕能小黑瓶详情页.jpg';
 
 export const ProductShowcase: React.FC = () => {
   const { t } = useLanguage();
@@ -165,38 +167,31 @@ const ProductSection: React.FC<{ product: Product; index: number; t: (key: strin
 const WhiteBottleVisual: React.FC<{t: (key: string) => string}> = ({ t }) => (
     <div className="relative w-64 h-[400px] bg-white/80 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl flex flex-col items-center justify-center p-8 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-transparent"></div>
-        <div className="text-center relative z-10">
+        <div className="text-center relative z-10 flex flex-col items-center">
             <h3 className="text-2xl font-serif text-brand-purple font-bold">IPE. EPA</h3>
             <p className="text-xs text-gray-500 uppercase mt-2">{t('prod.white.bottle_sub')}</p>
-            <div className="my-8 w-32 h-32 mx-auto rounded-full border-2 border-blue-500/20 flex items-center justify-center">
-                <span className="text-3xl font-bold text-blue-600">97%</span>
-            </div>
+            <img
+                src={whiteBottleDetail}
+                alt={t('prod.white.title')}
+                className="my-6 w-40 h-40 object-contain drop-shadow-2xl"
+            />
             <p className="text-sm font-medium text-gray-800">{t('prod.white.bottle_badge')}</p>
         </div>
     </div>
 );
 
 const BlackBottleVisual: React.FC<{t: (key: string) => string}> = ({ t }) => (
-    <div className="relative w-64 h-[400px] bg-black border border-purple-500/30 rounded-3xl shadow-[0_0_50px_rgba(139,92,246,0.3)] flex flex-col items-center justify-center p-8">
-        <h3 className="text-2xl font-serif text-white font-bold">{t('prod.black.bottle_name')}</h3>
-        <p className="text-xs text-purple-300 uppercase mt-2">{t('prod.black.bottle_sub')}</p>
-        <div className="my-8 relative w-32 h-32 mx-auto">
-            {/* Orbiting effect */}
-            <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 border border-purple-500/50 rounded-full"
-            >
-                <div className="absolute -top-1 left-1/2 w-2 h-2 bg-purple-400 rounded-full shadow-[0_0_10px_#a855f7]"></div>
-            </motion.div>
-            <motion.div 
-                animate={{ rotate: -360 }}
-                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-2 border border-pink-500/30 rounded-full"
-            >
-                <div className="absolute -bottom-1 left-1/2 w-2 h-2 bg-pink-400 rounded-full"></div>
-            </motion.div>
+    <div className="relative w-64 h-[400px] bg-black border border-purple-500/30 rounded-3xl shadow-[0_0_50px_rgba(139,92,246,0.3)] flex flex-col items-center justify-center p-8 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-transparent to-transparent"></div>
+        <div className="relative z-10 text-center flex flex-col items-center">
+            <h3 className="text-2xl font-serif text-white font-bold">{t('prod.black.bottle_name')}</h3>
+            <p className="text-xs text-purple-300 uppercase mt-2">{t('prod.black.bottle_sub')}</p>
+            <img
+                src={blackBottleDetail}
+                alt={t('prod.black.title')}
+                className="my-6 w-40 h-40 object-contain drop-shadow-[0_0_25px_rgba(168,85,247,0.5)]"
+            />
+            <p className="text-sm font-medium text-purple-200">{t('prod.black.tech')}</p>
         </div>
-        <p className="text-sm font-medium text-purple-200">{t('prod.black.tech')}</p>
     </div>
 );

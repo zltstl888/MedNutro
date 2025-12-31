@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
+import whiteBottleHero from '../assets/images/小白瓶_IPE.EPA鱼油.jpg';
+import blackBottleHero from '../assets/images/小黑瓶_Women40+.jpg';
 
 export const HeroSection: React.FC = () => {
   const { t } = useLanguage();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // IMPORTANT: 
-  // 1. Please save your uploaded White Bottle image as 'white-bottle.png' in your public/assets folder.
-  // 2. Please save your uploaded Black Bottle image as 'black-bottle.png' in your public/assets folder.
-  // The URLs below are fallbacks to Unsplash if local files are missing.
   const heroImages = [
     {
       id: 'white-bottle',
-      src: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=600", 
-      // Use this if you have local file: src: "/assets/white-bottle.png",
+      src: whiteBottleHero,
       alt: "MedNutro IPE EPA White Bottle",
       bgColor: "bg-brand-blue"
     },
     {
       id: 'black-bottle',
-      src: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=600",
-      // Use this if you have local file: src: "/assets/black-bottle.png",
+      src: blackBottleHero,
       alt: "MedNutro Women's 40+ Beauty Formula",
       bgColor: "bg-brand-purple"
     }
