@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
+import globalMap from '../assets/images/全球引擎2.png';
 
 interface Location {
   id: string;
@@ -16,11 +17,10 @@ export const GlobalEngine: React.FC = () => {
   const { t } = useLanguage();
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
 
-  // Adjusted coordinates for the new detailed map projection
   const locations: Location[] = [
-    { id: 'ca', nameKey: 'global.can_title', descKey: 'global.can_desc', x: 20, y: 30, svgX: 200, svgY: 150 },
-    { id: 'us', nameKey: 'global.usa_title', descKey: 'global.usa_desc', x: 27, y: 38, svgX: 270, svgY: 190 },
-    { id: 'ch', nameKey: 'global.swiss_title', descKey: 'global.swiss_desc', x: 50.5, y: 31, svgX: 505, svgY: 155 },
+    { id: 'ca', nameKey: 'global.can_title', descKey: 'global.can_desc', x: 24, y: 40, svgX: 240, svgY: 205 },
+    { id: 'dc', nameKey: 'global.usa_title', descKey: 'global.usa_desc', x: 37, y: 41, svgX: 370, svgY: 210 },
+    { id: 'ch', nameKey: 'global.swiss_title', descKey: 'global.swiss_desc', x: 60, y: 42, svgX: 600, svgY: 215 },
   ];
 
   return (
@@ -59,9 +59,6 @@ export const GlobalEngine: React.FC = () => {
           <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:60px_60px] opacity-30"></div>
 
           <div className="absolute inset-0 flex items-center justify-center">
-            {/* 
-              ViewBox 0 0 1000 500 covers the world map area.
-            */}
             <svg viewBox="0 0 1000 500" className="w-full h-full drop-shadow-2xl">
               <defs>
                 {/* Gradient for connecting lines */}
@@ -71,11 +68,6 @@ export const GlobalEngine: React.FC = () => {
                   <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
                 </linearGradient>
                 
-                {/* Dot Pattern for "Tech" Continent Fill */}
-                <pattern id="dotPattern" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
-                  <circle cx="2" cy="2" r="1.5" className="fill-brand-blue/20" />
-                </pattern>
-
                 {/* Glow Filter */}
                 <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
                   <feGaussianBlur stdDeviation="4" result="blur" />
@@ -83,47 +75,15 @@ export const GlobalEngine: React.FC = () => {
                 </filter>
               </defs>
 
-              {/* World Map Group - More detailed paths */}
-              <g className="stroke-none">
-                 {/* North America */}
-                 <path 
-                   d="M160,70 L250,60 L350,70 L380,110 L320,150 L280,180 L260,230 L220,240 L190,200 L150,180 L120,120 L160,70 Z M100,70 L130,60 L140,80 L110,90 Z" 
-                   fill="url(#dotPattern)" 
-                   className="opacity-60 hover:opacity-100 transition-opacity duration-700"
-                 />
-                 
-                 {/* South America */}
-                 <path 
-                   d="M260,245 L320,245 L360,280 L340,380 L300,430 L280,450 L260,350 L240,280 Z" 
-                   fill="url(#dotPattern)"
-                   className="opacity-60 hover:opacity-100 transition-opacity duration-700"
-                 />
-
-                 {/* Europe & Asia (Combined for smoother visual) */}
-                 <path 
-                   d="M440,110 L500,80 L600,70 L750,70 L850,90 L900,150 L850,220 L750,260 L650,240 L600,200 L550,180 L520,150 L480,160 L460,140 Z" 
-                   fill="url(#dotPattern)"
-                   className="opacity-60 hover:opacity-100 transition-opacity duration-700"
-                 />
-                 {/* Japan */}
-                 <path d="M860,160 L890,150 L900,190 L870,200 Z" fill="url(#dotPattern)" className="opacity-80" />
-                 {/* UK */}
-                 <path d="M430,100 L450,90 L460,120 L440,130 Z" fill="url(#dotPattern)" className="opacity-80" />
-
-                 {/* Africa */}
-                 <path 
-                   d="M450,180 L540,180 L570,240 L540,350 L500,380 L460,280 L440,220 Z" 
-                   fill="url(#dotPattern)"
-                   className="opacity-60 hover:opacity-100 transition-opacity duration-700"
-                 />
-
-                 {/* Australia */}
-                 <path 
-                   d="M780,320 L880,310 L900,380 L800,400 Z" 
-                   fill="url(#dotPattern)"
-                   className="opacity-60 hover:opacity-100 transition-opacity duration-700"
-                 />
-              </g>
+              <image
+                href={globalMap}
+                x="0"
+                y="0"
+                width="1000"
+                height="500"
+                preserveAspectRatio="xMidYMid slice"
+                opacity="0.95"
+              />
 
               {/* Connections Layer */}
               <g className="pointer-events-none">
@@ -149,10 +109,10 @@ export const GlobalEngine: React.FC = () => {
                   onMouseLeave={() => setActiveLocation(null)}
                 >
                    {/* Interactive Node */}
-                   <div className="relative -translate-x-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center cursor-pointer group">
-                      {/* Outer Ring Animation */}
-                      <div className="absolute w-full h-full bg-brand-blue/20 rounded-full animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
-                      <div className="absolute w-4 h-4 bg-brand-blue/40 rounded-full animate-pulse"></div>
+                  <div className="relative -translate-x-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center cursor-pointer group">
+                     {/* Outer Ring Animation */}
+                      <div className="absolute w-full h-full bg-brand-blue/20 rounded-full animate-[pulse_3s_ease-in-out_infinite]"></div>
+                      <div className="absolute w-4 h-4 bg-brand-blue/50 rounded-full animate-[pulse_2s_ease-in-out_infinite]"></div>
                       <div className="w-2 h-2 bg-white rounded-full shadow-[0_0_15px_rgba(59,130,246,1)] group-hover:scale-125 transition-transform duration-300 relative z-10"></div>
                       
                       {/* Label Label */}
@@ -188,16 +148,11 @@ export const GlobalEngine: React.FC = () => {
              ))}
           </div>
 
-          {/* HUD Elements - Updated for customer meaningfulness */}
-          <div className="absolute bottom-8 left-8 flex gap-8 pointer-events-none">
-             <div>
-                <div className="text-xs text-brand-blue uppercase tracking-[0.2em] mb-1">{t('global.stat_hubs')}</div>
-                <div className="text-xl font-bold font-serif">3</div>
-             </div>
-             <div>
-                <div className="text-xs text-gray-500 uppercase tracking-[0.2em] mb-1">{t('global.stat_quality')}</div>
-                <div className="text-xl font-bold font-serif">{t('global.val_quality')}</div>
-             </div>
+          {/* Bottom HUD Text */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center pointer-events-none">
+            <div className="text-[10px] text-brand-blue uppercase tracking-[0.35em] mb-1">GLOBAL LAYOUT 3</div>
+            <div className="text-[10px] text-gray-300 uppercase tracking-[0.35em] mb-1">QUALITY BENCHMARK</div>
+            <div className="text-xl font-bold font-serif text-white/90">Clinical Grade+</div>
           </div>
 
         </div>
@@ -221,26 +176,21 @@ const AnimatedConnection: React.FC<{ x1: number, y1: number, x2: number, y2: num
       {/* Base faint line */}
       <path d={path} fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
       
-      {/* Animated Glowing Packet */}
+      {/* Animated Flowing Dash */}
       <motion.path 
         d={path} 
         fill="none" 
         stroke="url(#lineGradient)" 
-        strokeWidth="3"
+        strokeWidth="2.5"
         strokeLinecap="round"
-        strokeDasharray="0 1" 
-        initial={{ pathLength: 0, pathOffset: 0, opacity: 0 }}
-        animate={{ 
-            pathLength: [0, 0.4, 0], // Grow then shrink
-            pathOffset: [0, 0.6, 1], // Move along path
-            opacity: [0, 1, 0] // Fade in/out
-        }}
+        strokeDasharray="6 10"
+        animate={{ strokeDashoffset: [0, -32], opacity: [0.2, 0.9, 0.2] }}
         transition={{ 
-          duration: 4, 
+          duration: 3.5, 
           repeat: Infinity, 
-          ease: "easeInOut",
+          ease: "linear",
           delay: delay,
-          repeatDelay: 0.5
+          repeatDelay: 0
         }}
         filter="url(#glow)"
       />

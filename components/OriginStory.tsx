@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
+import awakeningImage from '../assets/images/生命觉醒感.png';
 
 export const OriginStory: React.FC = () => {
   const { t } = useLanguage();
@@ -18,7 +19,7 @@ export const OriginStory: React.FC = () => {
             {/* Decorative background box */}
             <div className="absolute inset-0 bg-brand-purple/10 transform translate-x-4 translate-y-4" aria-hidden="true"></div>
             <img
-              src="https://images.unsplash.com/photo-1507537362848-9c7e70b7b5c1?auto=format&fit=crop&q=80&w=800"
+              src={awakeningImage}
               alt="MedNutro Founder"
               className="relative z-10 w-full h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
