@@ -2,29 +2,45 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
-// Suppress specific library warnings that are harmless but annoying in development
+// Suppress specific library warnings (React 19 defaultProps and ResizeObserver)
 const originalConsoleError = console.error;
+const originalConsoleWarn = console.warn;
+
+const suppressionFilter = (msg: any) => {
+  const message = String(msg);
+  return (
+    message.includes('defaultProps') || 
+    message.includes('Support for defaultProps') ||
+    message.includes('ResizeObserver loop') ||
+    message.includes('componentWillReceiveProps')
+  );
+};
+
 console.error = (...args) => {
-  const msg = typeof args[0] === 'string' ? args[0] : '';
-  // Suppress defaultProps warnings (React 19) and ResizeObserver loop (common in charts)
-  if (
-    msg.includes('defaultProps') || 
-    msg.includes('Support for defaultProps') ||
-    msg.includes('ResizeObserver loop')
-  ) {
-    return;
-  }
+  if (suppressionFilter(args[0])) return;
   originalConsoleError(...args);
 };
 
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error("Could not find root element to mount to");
-}
+console.warn = (...args) => {
+  if (suppressionFilter(args[0])) return;
+  originalConsoleWarn(...args);
+};
 
-const root = ReactDOM.createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const mountApp = () => {
+  const rootElement = document.getElementById('root');
+  if (!rootElement) return;
+
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+};
+
+// Ensure DOM is ready before mounting
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', mountApp);
+} else {
+  mountApp();
+}

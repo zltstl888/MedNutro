@@ -8,62 +8,63 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ className = "h-12 w-auto" 
   return (
     <svg 
       xmlns="http://www.w3.org/2000/svg" 
-      viewBox="0 0 280 80" 
+      viewBox="0 0 320 100" 
       fill="none"
       className={className}
       aria-label="MedNutro - Natural Balance"
     >
-      <defs>
-        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="50%" stopColor="#D1D5DB" /> {/* Silver/Gray */}
-          <stop offset="100%" stopColor="#F3F4F6" /> {/* White-ish */}
-        </linearGradient>
-      </defs>
+      {/* MédNutro Text - Using serif style font simulation with path-like styling */}
+      <g fill="#737373" style={{ fontFamily: "'Playfair Display', serif", fontWeight: '600' }}>
+        <text x="5" y="60" fontSize="56" letterSpacing="-1">M</text>
+        <text x="58" y="60" fontSize="56" letterSpacing="-1">é</text>
+        <text x="88" y="60" fontSize="56" letterSpacing="-1">d</text>
+        <text x="120" y="60" fontSize="56" letterSpacing="-1">N</text>
+        <text x="162" y="60" fontSize="56" letterSpacing="-1">utro</text>
+      </g>
 
-      {/* Main Brand Text: MédNutro */}
-      <text 
-        x="10" 
-        y="48" 
-        fontFamily="'Playfair Display', serif" 
-        fontWeight="700" 
-        fontSize="44" 
-        fill="url(#logoGradient)"
-        letterSpacing="-1"
-        style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}
-      >
-        MédNutro
-      </text>
-      
+      {/* The green leaf accent on the 'é' */}
+      <path 
+        d="M65 18 C 72 15, 82 15, 88 18 C 82 23, 72 23, 65 18 Z" 
+        fill="#4CAF50" 
+      />
+
       {/* Subtitle: Natural Balance */}
       <text 
-        x="12" 
-        y="70" 
+        x="8" 
+        y="85" 
         fontFamily="'Inter', sans-serif" 
         fontWeight="400" 
-        fontSize="12" 
-        letterSpacing="3" 
-        fill="#9CA3AF"
+        fontSize="18" 
+        letterSpacing="2" 
+        fill="#A3A3A3"
       >
-        NATURAL BALANCE
+        Natural Balance
       </text>
-      
-      {/* Leaf/Organic Accent - Integrated simple shape */}
-      <path 
-        d="M225 35 C 235 25, 245 15, 250 12 C 255 15, 255 30, 245 40 C 240 42, 235 42, 225 35 Z" 
-        fill="url(#logoGradient)" 
-        opacity="0.9"
-      />
-      
-      {/* Decorative Swoosh */}
-      <path 
-        d="M130 58 Q 200 65 250 45" 
-        stroke="url(#logoGradient)" 
-        strokeWidth="1.5" 
-        fill="none" 
-        opacity="0.5" 
-        strokeLinecap="round"
-      />
+
+      {/* Right side Graphic: Capsule and Swoosh */}
+      <g opacity="0.8">
+        {/* Swoosh Curve */}
+        <path 
+          d="M165 65 C 220 85, 280 80, 295 45" 
+          stroke="#737373" 
+          strokeWidth="2.5" 
+          strokeLinecap="round" 
+          fill="none" 
+        />
+        
+        {/* Capsule Shape */}
+        <rect 
+          x="285" y="25" width="12" height="28" rx="6" 
+          fill="#737373" 
+          transform="rotate(45, 291, 39)" 
+        />
+        
+        {/* Small leaf on the capsule */}
+        <path 
+          d="M278 35 C 282 32, 286 32, 288 35 C 286 38, 282 38, 278 35 Z" 
+          fill="#737373" 
+        />
+      </g>
     </svg>
   );
 };
